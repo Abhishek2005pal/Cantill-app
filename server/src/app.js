@@ -13,6 +13,16 @@ import multer from 'multer';
 
 const app = express();
 const currentDir = path.dirname(fileURLToPath(import.meta.url));
+app.use((request, response, next) => {
+  const origin = request.headers.origin;
+  if (!origin || origin === 'https://cantill-app.onrender.com' || origin.endsWith('.vercel.app')) {
+    response.setHeader('Access-Control-Allow-Origin', origin || '*');
+  }
+  response.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
+  response.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-User,X-Batch-Id');
+  if (request.method === 'OPTIONS') return response.sendStatus(204);
+  return next();
+});
 app.use(express.json({ limit: '1mb' }));
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 5 * 1024 * 1024 } });
 
