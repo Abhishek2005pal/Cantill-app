@@ -3,7 +3,7 @@ WORKDIR /app
 COPY package*.json ./
 COPY client/package*.json client/
 COPY server/package*.json server/
-RUN npm install
+RUN npm ci
 COPY client client
 RUN npm run build --workspace client
 
@@ -13,7 +13,7 @@ ENV NODE_ENV=production
 COPY package*.json ./
 COPY client/package*.json client/
 COPY server/package*.json server/
-RUN npm install --omit=dev
+RUN npm ci --omit=dev
 COPY server server
 COPY kit kit
 COPY --from=client-build /app/client/dist client/dist
