@@ -5,7 +5,8 @@ COPY client/package*.json client/
 COPY server/package*.json server/
 RUN npm ci
 COPY client client
-RUN npm run build --workspace client
+COPY scripts/build-client.mjs scripts/build-client.mjs
+RUN npm run build
 
 FROM node:20-alpine AS runtime
 WORKDIR /app
