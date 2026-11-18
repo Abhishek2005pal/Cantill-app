@@ -1,0 +1,13 @@
+{
+  "generated_at": "2026-11-18T15:02:34.982Z",
+  "source_directory": "D:\\Cantill_FullStack_Task_Kit_vf\\Cantill_FullStack_Task_Kit",
+  "counts": {
+    "items": 73,
+    "suppliers": 48,
+    "plants": 2,
+    "po_history": 468,
+    "contracts": 10,
+    "contract_lines": 26
+  },
+  "problems": []
+}

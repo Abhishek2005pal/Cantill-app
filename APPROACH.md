@@ -15,3 +15,10 @@
 - Date strings are normalized to UTC. Calendar-day policy windows use UTC calendar dates; the 24-hour PO-consolidation rule uses full UTC timestamps.
 
 The kit directory is treated as read-only input and is not edited.
+
+## Verification record
+
+- Tools used: VS Code/Copilot for repository inspection and implementation, Node 20/npm, Vitest, Supertest, Vite, MongoDB, Docker Compose configuration, curl, and GitHub Actions.
+- AI usage: Gemini is isolated behind `server/src/llm/llm.js` for chat field extraction, policy amendment interpretation, and contract PDF extraction. The policy diff, validation, supplier ranking, and decision engine are deterministic and do not call the LLM.
+- Manual verification: inspected all governing PDFs and CSV schemas; checked the seed counts and data-quality report; ran the sample batch and reviewed route distribution and suspicious rows; checked active policy resolution, contract source handling, supplier exclusion, CSV headers, UI workflows, and Docker/Render configuration.
+- Automated verification: engine boundary tests, policy resolver/diff tests, preferred-ranking determinism/as-of tests, API Supertest tests, CSV parser/export round-trip tests, mocked LLM/document tests, and client production build in CI.

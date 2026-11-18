@@ -1,0 +1,25 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      MONGO_URI: mongodb://mongo:27017/cantill
+      PORT: 3000
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      KIT_DIR: /kit
+    depends_on:
+      mongo:
+        condition: service_healthy
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  mongo-data:
