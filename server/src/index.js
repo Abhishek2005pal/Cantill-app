@@ -12,8 +12,12 @@ mongoose.connect(mongoUri)
     const [itemCount, policyCount] = await Promise.all([Item.countDocuments(), Policy.countDocuments()]);
     if (itemCount === 0 || policyCount === 0) {
       console.log('MongoDB is missing seed data; importing the kit automatically...');
-      await seed();
-      console.log('Automatic seed completed.');
+      try {
+        await seed();
+        console.log('Automatic seed completed.');
+      } catch (seedError) {
+        console.error('Automatic seed failed; app will remain live for diagnostics:', seedError.message);
+      }
     }
     app.listen(port, () => console.log(`Cantill API listening on ${port}`));
   })

@@ -42,7 +42,7 @@ const date = (value, file, row, field) => {
 };
 
 async function findKit() {
-  const candidates = [process.env.KIT_DIR, '/kit', path.resolve(rootDir, '..', 'Cantill_FullStack_Task_Kit')].filter(Boolean);
+  const candidates = [process.env.KIT_DIR, '/kit', '/app/kit', path.resolve(rootDir, 'kit'), path.resolve(rootDir, '..', 'Cantill_FullStack_Task_Kit')].filter(Boolean);
   for (const candidate of candidates) {
     try {
       await fs.access(path.join(candidate, 'master_data'));
